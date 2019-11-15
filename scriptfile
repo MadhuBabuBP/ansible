@@ -1,0 +1,10 @@
+#!/bin/bash
+echo ""[D325"
+read a
+fact=1
+while [ $a -ne 0][0 ]
+do
+fact=$()[Dexpr $fact \* $a)
+a=$(expr $a -1)
+done
+echo $fact
