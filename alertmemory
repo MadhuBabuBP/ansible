@@ -1,0 +1,33 @@
+#!/bin/bash 
+#######################################################################################
+#Script Name    :alertmemory.sh
+#Description    :send alert mail when server memory is running low
+#Args           :       
+#Author         :ThanishInfotech
+#Email          :thanishinfotech@gmail.com
+#License       : GNU GPL-3	
+#######################################################################################
+## declare mail variables
+##email subject 
+subject="Server Memory Status Alert"
+##sending mail as
+from="thanishinfotech@gmail.com"
+## sending mail to
+to=" thanishinfotech@gmail.com "
+## send carbon copy to
+also_to="ravindra.devops@gmail.com"
+
+## get total free memory size in megabytes(MB) 
+free=$(free -mt | grep Total | awk '{print $4}')
+
+## check if free memory is less or equals to  600MB
+if [[ "$free" -le 600  ]]; then
+        ## get top processes consuming system memory and save to temporary file 
+        ps -eo pid,ppid,cmd,%mem,%cpu --sort=-%mem | head >/tmp/top_proccesses_consuming_memory.txt
+
+        file=/tmp/top_proccesses_consuming_memory.txt
+        ## send email if system memory is running low
+        echo -e "Warning, server memory is running low!\n\nFree memory: $free MB" | mailx -a "$file" -s "$subject" -r "$from" -c "$to" "$also_to"
+fi
+
+exit 0[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[B[B[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cmadhubb95@gmail.com[C[C[C[C[C[[C[C[C[C[C[C[C[C[C[C.com"[A[A[A[B[D[D[D[Dmadhubp367[C[C[C[C[C[C[[C[C[C[C[C[C[C[C[C[C[C@gmail.com"[A[Amadhubp367@gmail.com[C[Ccom[C[C[C[C[C[C[C[C"[A[A[A[A[A[A[Amadhubp367[C[C[C[C[C[C[C[C[C[C@gmail.com[A[D[D[D[D[D[D[D[D[D[D[madhubabuinfotech[B[B[B[B[B[B[B[B[B[B[B[B[B[B[B[B[B[B[B[B[B[B[B[B[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[B[B[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[B[D
